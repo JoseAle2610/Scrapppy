@@ -1,5 +1,6 @@
 import Url from './entities/Url.js'
-import SelectorText from './selectors/SelectorText.js'
+// import SelectorText from './selectors/SelectorText.js'
+import SelectorUrl from './selectors/SelectorUrl.js'
 import readline from './stdin.js'
 
 // const baseUrl = 'https://gptables.azurecurve.co.uk/products/microsoft-dynamics-gp-0/'
@@ -13,7 +14,7 @@ import readline from './stdin.js'
   const className = 'table.wikitable b a'
 
 
-  Page.addSelector(new SelectorText(className, 'namePresident'))
+  Page.addSelector(new SelectorUrl(className, 'namePresident'))
 
   console.log('selection', Page.getSelections())
 
