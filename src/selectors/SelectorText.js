@@ -9,7 +9,7 @@ class SelectorText extends Selector {
   selection (html){
     const $ = cheerio.load(html)
     const elemets = [... $(this._cssSelector)]
-    return elemets.map( e => $(e).text() )
+    return elemets.map( e => $(e).text().trim() )
   }
 }
 

@@ -12,6 +12,13 @@ class Selector {
     const elemets = [... $(this._cssSelector)]
     return elemets.map( e => $(e).text() )
   }
+
+  get name () {return this._name}
+  get id () {return this._id}
+  get cssSelector () {return this._cssSelector}
+  set name (name) { this._name = name}
+  set id (id) { this._name = id}
+  set cssSelector (cssSelector) { this._name = cssSelector}
 }
 
 export default Selector

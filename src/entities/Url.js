@@ -27,16 +27,13 @@ class Url {
   }
 
   addSelector(selector) {
-    console.log(selector instanceof Selector)
+    if (selector instanceof Selector) {
       this._selectors.push(selector)
+    }
   }
 
   getSelections() {
-    const selections = []
-    for (let selector of this._selectors) {
-      console.log(selector.selection(this._html))
-    }
-    return selections
+    return this._selectors.map( e => e.selection(this._html)
   }
 
 
