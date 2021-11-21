@@ -1,9 +1,8 @@
 import cheerio from 'cheerio'
 
 class Selector {
-  constructor (cssSelector = '', name = '', id = '') {
+  constructor (cssSelector = '', name = '') {
     this._name = name
-    this._id = id
     this._cssSelector = cssSelector
   }
 

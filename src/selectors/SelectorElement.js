@@ -2,8 +2,8 @@ import cheerio from 'cheerio'
 import Selector from '../entities/Selector.js'
 
 class SelectorElement extends Selector {
-  constructor (cssSelector = '', name = '', id = '') {
-    super(cssSelector, name, id)
+  constructor (cssSelector = '', name = '') {
+    super(cssSelector, name)
     this._selectors = []
     this._element = {}
   }
