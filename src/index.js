@@ -13,8 +13,7 @@ import readline from './stdin.js'
   const baseUrl = 'https://gptables.azurecurve.co.uk/products/microsoft-dynamics-gp-0/'
   const className = 'span a.azc_pi'
   const Page = new Url( baseUrl, 'Main')
-  const html = await Page.loadPage()
-
+  await Page.loadPage()
 
   // const selectorE = new SelectorElement(className, 'namePresident')
   // selectorE.addSelector(new SelectorText('tr td:nth-child(5) b a', 'colName'))
@@ -23,7 +22,8 @@ import readline from './stdin.js'
   const selectorurl = new SelectorUrl(className, 'modulesGp', className)
   selectorurl.addSelector(new SelectorText(className, 'tableGp'))
   Page.addSelector(selectorurl)
+  Page.addSelector(new SelectorText('h1', 'title'))
 
-  console.log(Page.getSelections())
+  console.log(await Page.getSelections())
 
 })()

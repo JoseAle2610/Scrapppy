@@ -29,10 +29,15 @@ class Url {
     }
   }
 
-  getSelections() {
-    return this._selectors.map( e => {
-      return e.selection(this._html)
+  async getSelections() {
+    const select = this._selectors.map( async e => {
+      const data = {
+        name: e.name,
+        data: await e.selection(this._html)
+      }
+      return data
     })
+    return Promise.all(select)
   }
 
 

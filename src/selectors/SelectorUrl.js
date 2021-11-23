@@ -11,28 +11,30 @@ class SelectorUrl extends Selector {
     this._selectors = []
   }
 
-  selection (html){
-    const $ = cheerio.load(html)
-    const elemets = [... $(this._cssSelector)]
-    this._urls = elemets.map( e => $(e).attr('href') )
-    this.loadPages()
-    console.log('finish')
-    return this._urls
+  async selection (html){
+    // get urls
+    const urls = this.getUrls(html)
+    return await this.loadPages(urls)
   }
 
-  loadPages ( ) {
-    const pages = this._urls.map(async url => {
+  async loadPages (urls) {
+    const pages = urls.map(async url => {
       const page = new Url(url, 'subUrl')
       const html = await page.loadPage()
       this._selectors.map(selector => {
         page.addSelector(selector)
       })
-      console.log(page.getSelections())
-      // console.log(html)
-      // console.log(this._pageClass)
-      return page
+      console.log('page loaded')
+      return page.getSelections()
     })
-    console.log(pages)
+    return Promise.all(pages)
+  }
+
+  getUrls (html){
+    const $ = cheerio.load(html)
+    const elemets = [... $(this._cssSelector)]
+    this._urls = elemets.map( e => $(e).attr('href') )
+    return this._urls
   }
 
   addSelector (selector) {
