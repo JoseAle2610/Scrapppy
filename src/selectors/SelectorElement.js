@@ -2,16 +2,15 @@ import cheerio from 'cheerio'
 import Selector from '../entities/Selector.js'
 
 class SelectorElement extends Selector {
-  constructor (cssSelector = '', name = '') {
-    super(cssSelector, name)
-    this._selectors = []
-    this._element = {}
+  constructor (cssClass = '', name = '') {
+    super(cssClass, name)
+    this._selectorsElement = []
   }
 
-  get selectors () {return this._selectors}
+  get selectorsElement () {return this._selectorsElement}
 
   selection (html){
-    return this._selectors.map(selector => {
+    return this._selectorsElement.map(selector => {
       return selector.selection(html)
 
     })
@@ -19,9 +18,9 @@ class SelectorElement extends Selector {
 
   addSelector (selector) {
     if(selector instanceof Selector){
-      const css = `${this._cssSelector} ${selector.cssSelector}`
-      selector.cssSelector = css
-      this._selectors.push(selector)
+      const css = `${this._cssClass} ${selector.cssClass}`
+      selector.cssClass = css
+      this._selectorsElement.push(selector)
     }
   }
 

@@ -1,27 +1,25 @@
 import cheerio from 'cheerio'
 import Selector from '../entities/Selector.js'
-import Url from '../entities/Url.js'
+import Page from '../entities/Page.js'
 
 class SelectorUrl extends Selector {
-  constructor (cssSelector = '', name = '', page='') {
-    super(cssSelector, name)
-    this._urls = []
-    this._pages = []
-    this._pageClass = page
-    this._selectors = []
+  constructor (cssClass = '', nameSelector = '') {
+    super(cssClass, nameSelector)
+    this._subUrls = []
+    this._selectorsPage = []
   }
 
   async selection (html){
-    // get urls
-    const urls = this.getUrls(html)
-    return await this.loadPages(urls)
+    // get subUrls
+    const subUrls = this.getsubUrls(html)
+    return await this.loadPages(subUrls)
   }
 
-  async loadPages (urls) {
-    const pages = urls.map(async url => {
-      const page = new Url(url, 'subUrl')
+  async loadPages (subUrls) {
+    const pages = subUrls.map(async url => {
+      const page = new Page(url, 'subUrl')
       const html = await page.loadPage()
-      this._selectors.map(selector => {
+      this._selectorsPage.map(selector => {
         page.addSelector(selector)
       })
       console.log('page loaded')
@@ -30,16 +28,16 @@ class SelectorUrl extends Selector {
     return Promise.all(pages)
   }
 
-  getUrls (html){
+  getsubUrls (html){
     const $ = cheerio.load(html)
-    const elemets = [... $(this._cssSelector)]
-    this._urls = elemets.map( e => $(e).attr('href') )
-    return this._urls
+    const elemets = [... $(this._cssClass)]
+    this._subUrls = elemets.map( e => $(e).attr('href') )
+    return this._subUrls
   }
 
   addSelector (selector) {
     if (selector instanceof Selector)
-      this._selectors.push(selector)
+      this._selectorsPage.push(selector)
   }
 }
 

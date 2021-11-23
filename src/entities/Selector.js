@@ -1,23 +1,21 @@
 import cheerio from 'cheerio'
 
 class Selector {
-  constructor (cssSelector = '', name = '') {
-    this._name = name
-    this._cssSelector = cssSelector
+  constructor (cssClass = '', nameSelector = '') {
+    this._nameSelector = nameSelector
+    this._cssClass = cssClass
   }
 
   selection (html){
     const $ = cheerio.load(html)
-    const elemets = [... $(this._cssSelector)]
+    const elemets = [... $(this._cssClass)]
     return elemets.map( e => $(e).text() )
   }
 
-  get name () {return this._name}
-  get id () {return this._id}
-  get cssSelector () {return this._cssSelector}
-  set name (name) { this._name = name}
-  set id (id) { this._name = id}
-  set cssSelector (cssSelector) { this._name = cssSelector}
+  get nameSelector () {return this._nameSelector}
+  set nameSelector (nameSelector) { this._nameSelector = nameSelector}
+  get cssClass () {return this._cssClass}
+  set cssClass (cssClass) { this._name = cssClass}
 }
 
 export default Selector
