@@ -4,13 +4,11 @@ import Selector from '../entities/Selector.js'
 class SelectorElement extends Selector {
   constructor (cssClass = '', name = '') {
     super(cssClass, name)
-    this._selectorsElement = []
+    this.selectorsElement = []
   }
 
-  get selectorsElement () {return this._selectorsElement}
-
   selection (html){
-    return this._selectorsElement.map(selector => {
+    return this.selectorsElement.map(selector => {
       return selector.selection(html)
 
     })
@@ -18,9 +16,9 @@ class SelectorElement extends Selector {
 
   addSelector (selector) {
     if(selector instanceof Selector){
-      const css = `${this._cssClass} ${selector.cssClass}`
+      const css = `${this.cssClass} ${selector.cssClass}`
       selector.cssClass = css
-      this._selectorsElement.push(selector)
+      this.selectorsElement.push(selector)
     }
   }
 

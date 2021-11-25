@@ -5,8 +5,8 @@ import Page from '../entities/Page.js'
 class SelectorUrl extends Selector {
   constructor (cssClass = '', nameSelector = '') {
     super(cssClass, nameSelector)
-    this._subUrls = []
-    this._selectorsPage = []
+    this.subUrls = []
+    this.selectorsPage = []
   }
 
   async selection (html){
@@ -19,7 +19,7 @@ class SelectorUrl extends Selector {
     const pages = subUrls.map(async url => {
       const page = new Page(url, 'subUrl')
       const html = await page.loadPage()
-      this._selectorsPage.map(selector => {
+      this.selectorsPage.map(selector => {
         page.addSelector(selector)
       })
       console.log('page loaded')
@@ -30,14 +30,14 @@ class SelectorUrl extends Selector {
 
   getsubUrls (html){
     const $ = cheerio.load(html)
-    const elemets = [... $(this._cssClass)]
-    this._subUrls = elemets.map( e => $(e).attr('href') )
-    return this._subUrls
+    const elemets = [... $(this.cssClass)]
+    this.subUrls = elemets.map( e => $(e).attr('href') )
+    return this.subUrls
   }
 
   addSelector (selector) {
     if (selector instanceof Selector)
-      this._selectorsPage.push(selector)
+      this.selectorsPage.push(selector)
   }
 }
 
