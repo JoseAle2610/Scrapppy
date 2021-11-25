@@ -11,9 +11,14 @@ class Page {
   }
 
   async loadPage(){
-    const htmlPage = await rp(this.urlPage)
-    this.htmlPage = htmlPage
-    return htmlPage
+    try {
+      const htmlPage = await rp(this.urlPage)
+      this.htmlPage = htmlPage
+      return htmlPage
+    } catch (err) {
+      console.log('Page not found')
+      return false
+    }
   }
 
   addSelector(selector) {
