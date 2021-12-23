@@ -14,7 +14,8 @@ import readline from './stdin.js'
   // const className = 'span a.azc_pi'
   const page = new Page( baseUrl, 'Main')
 
-  if (! await page.loadPage()) return
+  if (! await page.loadPage()) 
+    return
   // await page.loadPage()
 
   const selectorE = new SelectorElement(className, 'namePresident')
